@@ -1,0 +1,57 @@
+import { NavLink, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Analytics from './pages/Analytics.jsx';
+import SystemFlow from './pages/SystemFlow.jsx';
+
+const navItems = [
+  { label: 'Dashboard', to: '/' },
+  { label: 'Analytics', to: '/analytics' },
+  { label: 'System Flow', to: '/system-flow' }
+];
+
+export default function App() {
+  return (
+    <div className="app-shell">
+      <aside className="sidebar">
+        <div className="brand">
+          <span className="dot" />
+          <div>
+            <p className="brand-title">BrakeLab</p>
+            <p className="brand-subtitle">Simulator Suite</p>
+          </div>
+        </div>
+        <nav>
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === '/'}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'nav-link-active' : ''}`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+        <div className="sidebar-footer">
+          <p>Subjects Stack</p>
+          <ul>
+            <li>Prob & Random Processes</li>
+            <li>Computer Architecture</li>
+            <li>Algorithms</li>
+            <li>OOP Design</li>
+          </ul>
+        </div>
+      </aside>
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/system-flow" element={<SystemFlow />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}
+
